@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>XKCD Comics</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="flex justify-center w-full">
+        <a class="mx-4 my-auto text-4xl" style="font-family: 'Shadows Into Light', cursive;" href="/">XKCD</a>
+        <a class="mx-4 my-auto text-2xl" style="font-family: 'Shadows Into Light', cursive;" href="/about.html">About</a>
+    </nav>
+
+    <div class="max-w-2xl mx-auto my-8 grid grid-cols-1 sm:hidden">
+        <button class="w-20 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            Random
+        </button>
+    </div>
+
+    <div class="max-w-2xl mx-auto my-8 grid grid-cols-4 sm:grid-cols-5">
+        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            First
+        </button>
+
+        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            ←
+        </button>
+
+        <button class="w-20 mx-auto text-2xl border hidden sm:block border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            Random
+        </button>
+
+        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            →
+        </button>
+
+        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+            Last
+        </button>
+    </div>
+</body>
+</html>
