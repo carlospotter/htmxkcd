@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -28,6 +29,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	// make http request
 	comic, err := getComic("")
 	if err != nil {
+		fmt.Println(err.Error())
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Body:       err.Error(),
@@ -47,19 +49,20 @@ func main() {
 }
 
 func getComic(queryParam string) (Comic, error) {
-	request, err := http.NewRequest(http.MethodGet, "https://xkcd.com/info.0.json", http.NoBody)
-	if err != nil {
-		return Comic{}, err
-	}
-
-	response, err := http.DefaultClient.Do(request)
+	response, err := http.Get("https://xkcd.com/info.0.json")
 	if err != nil {
 		return Comic{}, err
 	}
 	defer response.Body.Close()
 
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		return Comic{}, err
+
+	}
+
 	var comic Comic
-	err = json.NewDecoder(request.Body).Decode(&comic)
+	err = json.Unmarshal(body, &comic)
 	if err != nil {
 		return Comic{}, err
 	}
@@ -69,8 +72,8 @@ func getComic(queryParam string) (Comic, error) {
 
 func getComicCard(comic Comic) string {
 	return fmt.Sprintf(`
-		<div class="mt-5"> \n 
-			<p class="text-3xl text-center" style="font-family: 'Shadows Into Light', cursive;">%d - %s</p> \n
+		<div class="mt-5"> 
+			<p class="text-3xl text-center" style="font-family: 'Shadows Into Light', cursive;">%d - %s</p>
 			<img class="mx-auto object-contain my-5" src="%s" alt="comic">
 			<p class="text-sm text-center mt-5" style="font-family: 'Shadows Into Light', cursive;">Source: <a href="https://xkcd.com/%d" target="_blank">https://xkcd.com/%d</a></p>
 		</div>`, comic.Number, comic.Title, comic.Image, comic.Number, comic.Number)

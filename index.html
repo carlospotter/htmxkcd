@@ -37,9 +37,11 @@
             →
         </button>
 
-        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
+        <button hx-get="/.netlify/functions/comic" hx-trigger="click" hx-swap="innerHTML" hx-target="#content" class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
             Last
         </button>
     </div>
+
+    <p id="content">Start</p>
 </body>
 </html>
