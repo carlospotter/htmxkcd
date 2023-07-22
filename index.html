@@ -11,37 +11,9 @@
 <body>
     <nav class="flex justify-center w-full">
         <a class="mx-4 my-auto text-4xl" style="font-family: 'Shadows Into Light', cursive;" href="/">XKCD</a>
-        <a class="mx-4 my-auto text-2xl" style="font-family: 'Shadows Into Light', cursive;" href="/about.html">About</a>
+        <a class="mx-4 my-auto text-2xl" style="font-family: 'Shadows Into Light', cursive;" href="./about">About</a>
     </nav>
 
-    <div class="max-w-2xl mx-auto my-8 grid grid-cols-1 sm:hidden">
-        <button class="w-20 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            Random
-        </button>
-    </div>
-
-    <div class="max-w-2xl mx-auto my-8 grid grid-cols-4 sm:grid-cols-5">
-        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            First
-        </button>
-
-        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            ←
-        </button>
-
-        <button class="w-20 mx-auto text-2xl border hidden sm:block border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            Random
-        </button>
-
-        <button class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            →
-        </button>
-
-        <button hx-get="/.netlify/functions/comic" hx-trigger="click" hx-swap="innerHTML" hx-target="#content" class="w-16 mx-auto text-2xl border border-black rounded" style="font-family: 'Shadows Into Light', cursive;">
-            Last
-        </button>
-    </div>
-
-    <p id="content">Start</p>
+    <p hx-get="/.netlify/functions/comic" hx-trigger="load" id="comic"></p>
 </body>
 </html>
